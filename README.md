@@ -1,6 +1,25 @@
 # Multiple-Couriers-Planning - Project Work Combinatorial Decision Making Optimization 2022/2023
 
 ## Introduction
+objective is to minimize the maximum distance travelled by any courier
+![image](https://user-images.githubusercontent.com/90778803/229518691-5d854f34-75cf-40e6-a91a-f66634a00683.png)
+The project work includes building models as well as conducting an experimental
+study to assess the performance of the solvers using different models and search
+strategies
+
+
+The CP model must be implemented in **MiniZinc** and run using at least
+Gecode, whereas the **SAT model** must be implemented using at least **Z3**.
+For both **SMT and MIP models**, students can use their favourite theories, solvers and languages.
+
+Solving processes that exceed a time limit of 5 minutes (300 secs) should
+be aborted.
+
+While a MiniZinc
+notation could be acceptable to describe a CP model, it is required in general
+to use propositional logic, first-order logic and appropriate mathematical notations. Do not copy and paste code!
+
+The report should be written in LATEX max 15 pages
 
 ## CP Model - Description of our model
 
