@@ -19,26 +19,35 @@ array [1..v+1,1..v+1] of int: distance = array2d(1..v+1,1..v+1,
                
 array[1..it, 1..c] of var bool: path;
 array [1..c] of var int: length;
-
-constraint forall(i in 1..it)(count([path[i,x] | x in 1..c],true) = 1); 
+/* each item is delivered by exactly one courier */
+constraint forall(i in 1..it)(count([path[i,x] | x in 1..c],true) = 1);
+/* each courier delivers no more items than their capacity. */
 constraint forall(x in 1..c)(count([path[i,x] | i in 1..it],true) <= courriers[x]);  
-
+/* calculates the length of the path for each courier and sets the corresponding length variable to that value */
 constraint forall(x in 1..c)(length[x] = length_calc(x,0,1));
 
+/* 
+This recursive function calculates the length of the path taken by a given courier, given the previous index, current index, and next index.
+
+param: 
+  index1 : represents the current index of the courier in the current path studied.
+  pastIndex : represents the last index of the courier in the current path studied.
+  index :  represents the current position in the array of items.
+*/
 function var int: length_calc(int: index1, int: pastIndex,int: index) =
-  if index > it then 
-    if pastIndex = 0 then 0
+  if index > it then /* If we have processed all items, return the distance from last item to depot */
+    if pastIndex = 0 then 0 /* If pastIndex is 0, it means no item has been visited yet, so return 0 */
     else
-      distance[items[pastIndex],10]
+      distance[items[pastIndex],10] /* return distance from last item visited to depot*/
     endif
-  elseif path[index,index1] then
-     if pastIndex = 0 then
-      length_calc(index1, index, index+1)+distance[10,items[index]]
-      else
-      length_calc(index1, index, index+1)+distance[items[pastIndex],items[index]]
+  elseif path[index,index1] then /* If the item at index can be assigned to the courier at index1 */
+     if pastIndex = 0 then /* If no item has been visited yet */
+      length_calc(index1, index, index+1)+distance[10,items[index]] /* Add distance from depot to current item */
+     else /* If items has been visited */
+      length_calc(index1, index, index+1)+distance[items[pastIndex],items[index]] /* Add distance from last visited item to current item */
       endif
-  else
-    length_calc(index1, pastIndex, index+1)
+  else /* If the item at index cannot be assigned to the courier at index1*/
+    length_calc(index1, pastIndex, index+1) /* Skip the current item and move on to the next item */
   endif;
 
 solve minimize sum((x in 1..c))(pow(length[x],2));
