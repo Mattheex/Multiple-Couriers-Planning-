@@ -1,0 +1,12 @@
+{
+    "gecode": {
+        "time": 0,
+        "optimal": true,
+        "obj": 366
+    },
+    "chuffed": {
+        "time": 0,
+        "optimal": true,
+        "obj": 366
+    }
+}

@@ -7,8 +7,8 @@ for k in range(1, 22):
     else:
         number = str(k)
 
-    new_file = open(getcwd() + "\\instancesDzn\\" + name +number+ ".dzn", 'w', encoding="utf-8")
-    with open(name +number+ ".dat", encoding="utf-8") as f:
+    new_file = open(getcwd() + "\\instancesDzn\\" + name + number + ".dzn", 'w', encoding="utf-8")
+    with open(getcwd() + "\\instancesDat\\" + name + number + ".dat", encoding="utf-8") as f:
         for i, line in enumerate(f):
             line = line.replace("\n", "")
             if i == 0:
