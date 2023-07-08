@@ -11,6 +11,11 @@ array[1..m, 1..v, 1..v] of var bool: path;
 array [1..m] of var int: length;
 var int: total = sum(k in 1..m)(length[k]);
 
+array[1..m, 1..v] of var int: nodes;
+constraint forall(k in 1..m, i,j in 1..v)(
+  path[k,i,j] -> nodes[k,i] = j
+);
+
 % Each path must visit exactly one outgoing node from the depot node
 constraint forall(k in 1..m)(sum(i in 1..n)(path[k,v,i]) = 1);
 % Each path must visit exactly one incoming node to the depot node
@@ -43,12 +48,12 @@ constraint forall(i,j in 1..n where i < j /\ D[i,j] == D[j,i] )(forall(k in 1..m
 
 % Lexicographic order constraints to break symmetry in the path variables
 constraint forall(k1, k2 in 1..m where k1 < k2 /\ l[k1] == l[k2])(
-     lex_lesseq([path[k1, i, j] | i, j in 1..v where i != j], [path[k2, i, j] | i, j in 1..v where i != j])
-);
-constraint forall(k in 1..m)(
-     lex_lesseq([path[k,i,j] | i,j in 1..v where i != j],[path[k,i,j] | i in reverse(1..v),j in 1..v where i != j]) /\
-     lex_lesseq([path[k,i,j] | i,j in 1..v where i != j],[path[k,j,i] | i in 1..v, j in reverse(1..v) where i != j]) 
-);
+  lex_lesseq([path[k1, i, j] | i, j in 1..v where i != j], [path[k2, i, j] | i, j in 1..v where i != j])
+ );
+% constraint forall(k in 1..m)(
+%      lex_lesseq([path[k,i,j] | i,j in 1..v where i != j],[path[k,i,j] | i in reverse(1..v),j in 1..v where i != j]) /\
+%      lex_lesseq([path[k,i,j] | i,j in 1..v where i != j],[path[k,j,i] | i in 1..v, j in reverse(1..v) where i != j]) 
+% );
 
 
 solve minimize total;

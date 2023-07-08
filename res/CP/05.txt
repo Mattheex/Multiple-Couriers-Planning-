@@ -2,11 +2,43 @@
     "gecode": {
         "time": 0,
         "optimal": true,
-        "obj": 366
+        "obj": 366,
+        "sol": [
+            [
+                2
+            ],
+            [
+                3,
+                1
+            ]
+        ]
     },
     "chuffed": {
         "time": 0,
         "optimal": true,
-        "obj": 366
+        "obj": 412,
+        "sol": [
+            [
+                2
+            ],
+            [
+                1,
+                3
+            ]
+        ]
+    },
+    "orTools": {
+        "time": 0,
+        "optimal": true,
+        "obj": 366,
+        "sol": [
+            [
+                2
+            ],
+            [
+                3,
+                1
+            ]
+        ]
     }
 }
