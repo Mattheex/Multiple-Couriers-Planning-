@@ -1,0 +1,14 @@
+{
+    "gecode": {
+        "time": 300,
+        "optimal": false
+    },
+    "chuffed": {
+        "time": 300,
+        "optimal": false
+    },
+    "orTools": {
+        "time": 300,
+        "optimal": false
+    }
+}
